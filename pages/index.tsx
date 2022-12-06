@@ -1,8 +1,19 @@
+import {useEffect} from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+import { invoke } from '@tauri-apps/api'
+
 export default function Home() {
+  // To make sure that this is only run on the client-side
+  useEffect(() => {
+    invoke('greet', { name: 'World' })
+    .then(console.log)
+    .catch(console.error)
+  }, []);
+  
+
   return (
     <div className={styles.container}>
       <Head>
